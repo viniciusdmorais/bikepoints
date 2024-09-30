@@ -1,1 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+}
 
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.race-track {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Aumenta a altura da pista */
+    border: 2px solid #333;
+    background-color: #e0e0e0;
+}
+
+.racer {
+    position: absolute;
+    left: 0; /* Começa da esquerda */
+    width: 180px; /* Aumenta a largura da imagem */
+    height: 180px; /* Aumenta a altura da imagem */
+}
+
+.top {
+    top: 8%; /* Ciclista 1 na parte superior */
+}
+
+.bottom {
+    bottom: 8%; /* Ciclista 2 na parte inferior */
+}
+
+#racer1 {
+    background-image: url('/assets/img/ciclista1.png');
+    background-size: contain; /* Ajusta a imagem ao tamanho do div */
+    background-repeat: no-repeat; /* Não repete a imagem */
+}
+
+#racer2 {
+    background-image: url('/assets/img/ciclista2.png');
+    background-size: contain; /* Ajusta a imagem ao tamanho do div */
+    background-repeat: no-repeat; /* Não repete a imagem */
+}
+
+.finish-line {
+    position: absolute;
+    top: 0;
+    right: 0; /* Linha de chegada à direita */
+    width: 5px;
+    height: 100%;
+    background-color: black; /* Linha de chegada */
+}
+
+.scores {
+    margin-top: 20px;
+}
+
+input[type="number"] {
+    width: 60px; /* Aumenta a largura dos campos de entrada */
+    font-size: 16px;
+    padding: 5px;
+    margin: 0 10px;
+}
+
+button {
+    padding: 5px 10px; /* Estilo dos botões */
+    font-size: 16px;
+}
