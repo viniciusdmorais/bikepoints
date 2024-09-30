@@ -33,13 +33,13 @@ body {
 }
 
 #racer1 {
-    background-image: url('https://github.com/viniciusdmorais/bikepoints/blob/main/assets/img/ciclista1.png?raw=true');
+    background-image: url('https://raw.githubusercontent.com/viniciusdmorais/bikepoints/refs/heads/main/assets/img/ciclista1.png');
     background-size: contain; /* Ajusta a imagem ao tamanho do div */
     background-repeat: no-repeat; /* Não repete a imagem */
 }
 
 #racer2 {
-    background-image: url('https://github.com/viniciusdmorais/bikepoints/blob/main/assets/img/ciclista2.png?raw=true');
+    background-image: url('https://raw.githubusercontent.com/viniciusdmorais/bikepoints/refs/heads/main/assets/img/ciclista2.png');
     background-size: contain; /* Ajusta a imagem ao tamanho do div */
     background-repeat: no-repeat; /* Não repete a imagem */
 }
