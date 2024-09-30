@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corrida de Bicicleta</title>
+    <script src="assets/js/script.js" defer></script>
+    <script src="assets/js/save.js" defer></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="dayOfWeek"></h1>
+        <h2>Corrida de Bicicleta</h2>
+        <div class="race-track">
+            <div id="racer1" class="racer top"></div>
+            <div id="racer2" class="racer bottom"></div>
+            <div class="finish-line"></div>
+        </div>
+        <div class="scores">
+            <input type="number" id="score1Input" min="0" max="10" value="0" placeholder="Ciclista 1"> 
+            <button id="addPoints1">+ Pontos Brabo</button>
+            <input type="number" id="score2Input" min="0" max="10" value="0" placeholder="Ciclista 2">
+            <button id="addPoints2">+ Pontos Gabriel</button>
+            <button id="saveScores">Salvar Pontuações</button> <!-- Botão para salvar -->
+        </div>
+    </div>
+
+    
+</body>
+</html>
