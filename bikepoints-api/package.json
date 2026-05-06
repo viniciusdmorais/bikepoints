@@ -1,0 +1,16 @@
+{
+  "name": "bikepoints-api",
+  "version": "1.0.0",
+  "description": "API para controlar pontuação do BikePoints",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.9.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
