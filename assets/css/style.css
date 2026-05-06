@@ -89,7 +89,7 @@ h2 {
 }
 
 #racer1 {
-    background-image: url('github.com/viniciusdmorais/bikepoints/blob/main/assets/img/ciclista1.png?raw=true');
+    background-image: url('https://raw.githubusercontent.com/viniciusdmorais/bikepoints/refs/heads/main/assets/img/ciclista1.png');
     /*background-image: url('../img/ciclista1.png');*/
     background-size: contain;
     background-repeat: no-repeat;
