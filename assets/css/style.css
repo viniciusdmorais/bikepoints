@@ -216,3 +216,143 @@ button:hover {
         transform: translateX(1600px);
     }
 }
+
+/* ========================= */
+/* RESPONSIVIDADE MOBILE */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .container {
+        width: 100%;
+        min-height: 100vh;
+        padding: 12px;
+        justify-content: flex-start;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin-top: 10px;
+    }
+
+    h2 {
+        font-size: 26px;
+        margin: 10px 0;
+    }
+
+    .password-box {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .password-box input,
+    .password-box button {
+        width: 90%;
+        max-width: 320px;
+    }
+
+    .race-track {
+        height: 330px;
+        border-radius: 18px;
+    }
+
+    .racer {
+        width: 120px;
+        height: 120px;
+    }
+
+    .top {
+        top: 35px;
+    }
+
+    .bottom {
+        bottom: 35px;
+    }
+
+    .finish-line {
+        right: 15px;
+        width: 10px;
+    }
+
+    .score-display {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 14px;
+    }
+
+    .player-card {
+        width: 90%;
+        max-width: 320px;
+        padding: 10px;
+    }
+
+    .scores {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+    }
+
+    .scores input,
+    .scores button {
+        width: 90%;
+        max-width: 320px;
+    }
+
+    .winner-banner {
+        font-size: 26px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    h1 {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .race-track {
+        height: 300px;
+    }
+
+    .racer {
+        width: 105px;
+        height: 105px;
+    }
+
+    .top {
+        top: 42px;
+    }
+
+    .bottom {
+        bottom: 42px;
+    }
+
+    .player-card h3 {
+        font-size: 17px;
+    }
+
+    .player-card span {
+        font-size: 22px;
+    }
+
+    input,
+    button {
+        font-size: 15px;
+        padding: 10px;
+    }
+}
