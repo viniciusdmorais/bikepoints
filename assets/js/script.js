@@ -1,38 +1,65 @@
+const API_URL = 'http://localhost:3000';
+const MAX_SCORE = 30;
+const ADMIN_PASSWORD = "bike123";
+
 const racer1 = document.getElementById('racer1');
 const racer2 = document.getElementById('racer2');
 
 const score1Input = document.getElementById('score1Input');
 const score2Input = document.getElementById('score2Input');
 
+const score1Text = document.getElementById('score1Text');
+const score2Text = document.getElementById('score2Text');
+
 const addPoints1 = document.getElementById('addPoints1');
 const addPoints2 = document.getElementById('addPoints2');
-const saveScores = document.getElementById('saveScores');
 
-const dayOfWeekElement = document.getElementById('dayOfWeek');
+const unlockBtn = document.getElementById('unlockBtn');
+const controls = document.getElementById('controls');
+const winnerBanner = document.getElementById('winnerBanner');
 
-// Carregar pontuações ao abrir a página
-window.onload = loadScores;
+unlockBtn.addEventListener('click', () => {
+    const password = document.getElementById('adminPassword').value;
 
-addPoints1.addEventListener('click', function() {
+    if (password === ADMIN_PASSWORD) {
+        controls.classList.remove('locked');
+        alert("Controles liberados 🔓");
+    } else {
+        alert("Senha incorreta 🚫");
+    }
+});
+
+addPoints1.addEventListener('click', async () => {
     updateScore(score1Input, 2);
+    await saveScores();
 });
 
-addPoints2.addEventListener('click', function() {
+addPoints2.addEventListener('click', async () => {
     updateScore(score2Input, 2);
+    await saveScores();
 });
 
-saveScores.addEventListener('click', saveScoresToFile);
+score1Input.addEventListener('input', async () => {
+    moveRacers();
+    await saveScores();
+});
 
-score1Input.addEventListener('input', moveRacers);
-score2Input.addEventListener('input', moveRacers);
+score2Input.addEventListener('input', async () => {
+    moveRacers();
+    await saveScores();
+});
 
 function updateScore(inputField, points) {
     let currentScore = parseInt(inputField.value) || 0;
+
     currentScore += points;
 
-    if (currentScore > 10) {
-        currentScore = 10;
-        alert("Pontuação máxima atingida!");
+    if (currentScore > MAX_SCORE) {
+        currentScore = MAX_SCORE;
+    }
+
+    if (currentScore < 0) {
+        currentScore = 0;
     }
 
     inputField.value = currentScore;
@@ -40,72 +67,84 @@ function updateScore(inputField, points) {
 }
 
 function moveRacers() {
-    const trackWidth = document.querySelector('.race-track').clientWidth - racer1.clientWidth;
+    const raceTrack = document.querySelector('.race-track');
+
+    const trackWidth =
+        raceTrack.clientWidth
+        - racer1.clientWidth
+        - 40;
 
     const score1 = parseInt(score1Input.value) || 0;
     const score2 = parseInt(score2Input.value) || 0;
 
-    const distance1 = (score1 / 10) * trackWidth;
-    const distance2 = (score2 / 10) * trackWidth;
+    score1Text.textContent = `${score1} / ${MAX_SCORE}`;
+    score2Text.textContent = `${score2} / ${MAX_SCORE}`;
 
-    racer1.style.transform = `translateX(${distance1}px)`;
-    racer2.style.transform = `translateX(${distance2}px)`;
+    const distance1 = (score1 / MAX_SCORE) * trackWidth;
+    const distance2 = (score2 / MAX_SCORE) * trackWidth;
 
-    if (score1 === 10) {
-        alert("Brabo venceu!");
-        resetRace();
-    } else if (score2 === 10) {
-        alert("Gabriel venceu!");
-        resetRace();
+    racer1.style.left = `${distance1}px`;
+    racer2.style.left = `${distance2}px`;
+
+    racer1.style.zIndex = score1 > score2 ? 2 : 1;
+    racer2.style.zIndex = score2 > score1 ? 2 : 1;
+
+    if (score1 >= MAX_SCORE) {
+        winnerBanner.classList.remove('hidden');
+        winnerBanner.innerHTML = "🏆 BRABO VENCEU O MÊS!";
+    } else if (score2 >= MAX_SCORE) {
+        winnerBanner.classList.remove('hidden');
+        winnerBanner.innerHTML = "⚡ GABRIEL VENCEU O MÊS!";
+    } else {
+        winnerBanner.classList.add('hidden');
+        winnerBanner.innerHTML = "";
     }
 }
 
-function resetRace() {
-    score1Input.value = '0';
-    score2Input.value = '0';
-    
-    moveRacers();
+async function loadScores() {
+    try {
+        const response = await fetch(`${API_URL}/scores`);
+
+        if (!response.ok) {
+            throw new Error('Erro ao carregar pontuação');
+        }
+
+        const data = await response.json();
+
+        score1Input.value = data.brabo ?? 0;
+        score2Input.value = data.gabriel ?? 0;
+
+        moveRacers();
+
+    } catch (error) {
+        console.error('Erro ao carregar pontuação:', error);
+        moveRacers();
+    }
 }
 
-function getDayOfWeek() {
-    const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
-    const currentDate = new Date();
-    const dayIndex = currentDate.getDay();
-    return daysOfWeek[dayIndex];
+async function saveScores() {
+    try {
+        const response = await fetch(`${API_URL}/scores`, {
+            method: 'PUT',
+
+            headers: {
+                'Content-Type': 'application/json',
+                'x-admin-password': ADMIN_PASSWORD
+            },
+
+            body: JSON.stringify({
+                brabo: Number(score1Input.value) || 0,
+                gabriel: Number(score2Input.value) || 0
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao salvar pontuação');
+        }
+
+    } catch (error) {
+        console.error('Erro ao salvar pontuação:', error);
+    }
 }
 
-dayOfWeekElement.textContent = getDayOfWeek();
-
-function saveScoresToFile() {
-    const scores = {
-        ciclista1: parseInt(score1Input.value) || 0,
-        ciclista2: parseInt(score2Input.value) || 0,
-        dia: getDayOfWeek()
-    };
-
-    // Cria um Blob com os dados JSON
-    const blob = new Blob([JSON.stringify(scores, null, 4)], { type: 'application/json' });
-    
-    // Cria um link temporário para download
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'pontuacoes.json'; // Nome do arquivo que será baixado
-    link.click();
-    
-    URL.revokeObjectURL(link.href); // Limpa o objeto URL após o download
-}
-
-// Função para carregar pontuações do arquivo JSON
-function loadScores() {
-    fetch('pontuacoes.json')
-        .then(response => {
-            if (!response.ok) throw new Error('Arquivo não encontrado');
-            return response.json();
-        })
-        .then(data => {
-            score1Input.value = data.ciclista1 || 0;
-            score2Input.value = data.ciclista2 || 0;
-            moveRacers(); // Atualiza a posição dos ciclistas
-        })
-        .catch(error => console.error('Erro ao carregar pontuações:', error));
-}
+loadScores();
