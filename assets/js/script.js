@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3000'; 
 const MAX_SCORE = 30;
 const ADMIN_PASSWORD = "bike123";
 
