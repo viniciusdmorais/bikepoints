@@ -89,13 +89,15 @@ h2 {
 }
 
 #racer1 {
-    background-image: url('../img/ciclista1.png');
+    background-image: url('./assets/img/ciclista1.png');
+    /*background-image: url('../img/ciclista1.png');*/
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 #racer2 {
-    background-image: url('../img/ciclista2.png');
+    background-image: url('./assets/img/ciclista2.png');
+    /*background-image: url('../img/ciclista2.png');*/
     background-size: contain;
     background-repeat: no-repeat;
 }
