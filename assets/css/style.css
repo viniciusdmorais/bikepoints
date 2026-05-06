@@ -14,9 +14,15 @@ body {
 }
 
 h2 {
-    font-size: 40px;
+    font-size: clamp(24px, 3vw, 42px);
+
     color: #38bdf8;
-    text-shadow: 0 0 15px #38bdf8;
+
+    text-shadow:
+        0 0 15px #38bdf8;
+
+    margin:
+        8px 0 12px;
 }
 
 .race-track {
@@ -27,12 +33,10 @@ h2 {
     border-radius: 25px;
     border: 3px solid #38bdf8;
     background:
-        linear-gradient(
-            to bottom,
+        linear-gradient(to bottom,
             #111827,
-            #1e293b
-        );
-    box-shadow: 0 0 30px rgba(56,189,248,0.5);
+            #1e293b);
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
 }
 
 .track-lines {
@@ -40,13 +44,11 @@ h2 {
     width: 200%;
     height: 100%;
     background-image:
-        repeating-linear-gradient(
-            to right,
+        repeating-linear-gradient(to right,
             transparent 0px,
             transparent 40px,
-            rgba(255,255,255,0.05) 40px,
-            rgba(255,255,255,0.05) 80px
-        );
+            rgba(255, 255, 255, 0.05) 40px,
+            rgba(255, 255, 255, 0.05) 80px);
 
     animation: trackMove 2s linear infinite;
 }
@@ -109,12 +111,10 @@ h2 {
     width: 15px;
     height: 100%;
     background:
-        repeating-linear-gradient(
-            white 0px,
+        repeating-linear-gradient(white 0px,
             white 20px,
             black 20px,
-            black 40px
-        );
+            black 40px);
 }
 
 .scores {
@@ -149,24 +149,41 @@ button:hover {
 
 .score-display {
     display: flex;
+
     justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
+
+    gap: 14px;
+
+    margin-top: 10px;
+
+    flex-wrap: wrap;
 }
 
 .player-card {
-    background: rgba(255,255,255,0.08);
-    padding: 15px 30px;
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    padding:
+        clamp(8px, 1vw, 14px) clamp(18px, 2vw, 28px);
+
     border-radius: 20px;
+
     backdrop-filter: blur(8px);
-    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+
+    box-shadow:
+        0 0 15px rgba(255, 255, 255, 0.1);
 }
 
 .winner-banner {
-    margin-top: 20px;
-    font-size: 40px;
+    margin-top: 12px;
+
+    font-size:
+        clamp(24px, 4vw, 48px);
+
     font-weight: bold;
-    animation: pulse 1s infinite;
+
+    animation:
+        pulse 1s infinite;
 }
 
 .hidden {
@@ -193,7 +210,7 @@ button:hover {
     position: absolute;
     width: 300px;
     height: 2px;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.15);
     animation: windMove 4s linear infinite;
 }
 
@@ -229,10 +246,20 @@ button:hover {
     }
 
     .container {
-        width: 100%;
-        min-height: 100vh;
-        padding: 12px;
-        justify-content: flex-start;
+        width: min(1400px, 96vw);
+        height: 100vh;
+
+        margin: auto;
+
+        padding: 10px;
+
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
     }
 
     h1 {
@@ -260,13 +287,40 @@ button:hover {
     }
 
     .race-track {
-        height: 330px;
-        border-radius: 18px;
+        position: relative;
+
+        width: 100%;
+
+        height: clamp(260px, 52vh, 520px);
+
+        overflow: hidden;
+
+        border-radius: 25px;
+
+        border: 3px solid #38bdf8;
+
+        background:
+            linear-gradient(to bottom,
+                #111827,
+                #1e293b);
+
+        box-shadow:
+            0 0 30px rgba(56, 189, 248, 0.5);
     }
 
     .racer {
-        width: 120px;
-        height: 120px;
+        position: absolute;
+
+        width: clamp(110px, 14vw, 220px);
+        height: clamp(110px, 14vw, 220px);
+
+        left: 0;
+
+        transition:
+            left 0.8s ease;
+
+        animation:
+            bikeBounce 1s infinite alternate;
     }
 
     .top {
